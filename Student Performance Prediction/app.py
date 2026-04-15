@@ -1,5 +1,5 @@
 import pickle
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 import numpy as np
 import pandas as pd
 import os
@@ -15,7 +15,7 @@ app = application
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return redirect('/predictdata')
 
 @app.route('/predictdata', methods= ['GET', 'POST'])
 def predict_datapoint():
