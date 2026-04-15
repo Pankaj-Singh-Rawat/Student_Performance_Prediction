@@ -8,7 +8,6 @@ import dill
 from src.exception import CustomException
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import r2_score
-import pickle
 
 def save_object(file_path, obj):
     try:
@@ -32,7 +31,7 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, param):
                 model.fit(X_train, y_train)
                 best_model = model
             else:
-                gs = GridSearchCV(model, para, cv=3, n_jobs=-1)
+                gs = GridSearchCV(model, para, cv=3, n_jobs=1)
                 gs.fit(X_train, y_train)
                 best_model = gs.best_estimator_
 
@@ -55,7 +54,7 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, param):
 def load_object(file_path):
     try:
         with open(file_path, "rb") as file_obj:
-            return pickle.load(file_obj)
+            return dill.load(file_obj)
 
     except Exception as e:
         raise CustomException(e, sys)

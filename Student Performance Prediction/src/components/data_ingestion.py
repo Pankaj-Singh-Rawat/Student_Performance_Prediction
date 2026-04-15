@@ -30,7 +30,8 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Entered the Data Ingestion method")
         try:
-            data_path = os.path.join(os.getcwd(), "notebook/data/stud.csv")
+            BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+            data_path = os.path.join(BASE_DIR, "notebook", "data", "stud.csv")
             df = pd.read_csv(data_path)
             logging.info('Read the dataset as dataframe')
 
